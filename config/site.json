@@ -1,0 +1,8 @@
+{
+  "server": "ux-zabbix01.unisg.ch",
+  "port": 10051,
+  "server_certificate_name": "ux-zabbix01.unisg.ch",
+  "minimum_valid_days": 30,
+  "ca_file": "common/zabbix_ca.pem",
+  "intermediate_file": "common/agent-issuing-chain.pem"
+}

@@ -1,0 +1,14 @@
+# syntax=docker/dockerfile:1
+ARG PLATFORM_IMAGE=ubuntu:24.04@sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac
+FROM ${PLATFORM_IMAGE}
+ENV DEBIAN_FRONTEND=noninteractive container=docker
+RUN --mount=type=secret,id=proxy_ca,required=true \
+    apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca update && \
+    apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca install -y --no-install-recommends \
+      python3 openssl ca-certificates curl gnupg iproute2 systemd systemd-sysv && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -f /usr/sbin/policy-rc.d && \
+    : > /etc/machine-id
+COPY release/ /opt/agentzab/
+STOPSIGNAL SIGRTMIN+3
+CMD ["/sbin/init"]

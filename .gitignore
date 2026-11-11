@@ -1,0 +1,8 @@
+.runtime/
+backups/
+__pycache__/
+*.pyc
+.coverage
+dist/*
+!dist/agentzab-linux-mtls-3.0.0.zip
+!dist/agentzab-linux-mtls-3.0.0.zip.sha256
